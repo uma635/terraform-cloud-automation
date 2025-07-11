@@ -11,12 +11,12 @@ terraform {
 provider "aws" {
     region = "us-west-2"
 }
-resource "aws_s3_bucket" "my_bucket" {
-    bucket = "my-unique-bucket-name-123456"
-    acl    = "private"
 
-    tags = {
-        Name        = "MyBucket"
-        Environment = "Dev"
+
+resource "aws_s3_bucket_versioning" "my_bucket_versioning" {
+    bucket = aws_s3_bucket.my_bucket.id
+
+    versioning_configuration {
+        status = "Enabled"
     }
 }
